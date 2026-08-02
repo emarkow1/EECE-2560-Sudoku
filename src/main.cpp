@@ -11,7 +11,7 @@ int main()
    ifstream fin;
    
    // Read the sample grid from the file.
-   string fileName = "../../sudoku1.txt";
+   string fileName = "../sudoku1.txt";
 
    fin.open(fileName.c_str());
    if (!fin)
