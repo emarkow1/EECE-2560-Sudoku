@@ -36,7 +36,7 @@ class board{
 
         void setCell(int, int, ValueType);
 
-        void printConflicts();
+        // void printConflicts();
     private:
         matrix<ValueType> value;
 };

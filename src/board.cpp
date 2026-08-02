@@ -35,7 +35,7 @@ class board
       bool isBlank(int, int);
       ValueType getCell(int, int);
       void setCell(int, int, ValueType);
-      void printConflicts();
+      // void printConflicts();
       
    private:
 
@@ -94,8 +94,10 @@ ostream &operator<<(ostream &ostr, vector<int> &v)
 // Overloaded output operator for vector class.
 {
    for (int i = 0; i < v.size(); i++)
-      ostr << v[i] << " ";
+      ostr << v[i] << " ";   
    cout << endl;
+   
+   return ostr;
 }
 
 ValueType board::getCell(int i, int j)
@@ -150,34 +152,10 @@ void board::print()
    cout << endl;
 }
 
-int main()
+void board::setCell(int i, int j, ValueType val)
 {
-   ifstream fin;
-   
-   // Read the sample grid from the file.
-   string fileName = "sudoku.txt";
+   if (i < 1 || i > BoardSize || j < 1 || j > BoardSize)
+      throw rangeError("bad value in setCell");
 
-   fin.open(fileName.c_str());
-   if (!fin)
-   {
-      cerr << "Cannot open " << fileName << endl;
-      exit(1);
-   }
-
-   try
-   {
-      board b1(SquareSize);
-
-      while (fin && fin.peek() != 'Z')
-      {
-	 b1.initialize(fin);
-	 b1.print();
-	 b1.printConflicts();
-      }
-   }
-   catch  (indexRangeError &ex)
-   {
-      cout << ex.what() << endl;
-      exit(1);
-   }
+   value[i][j] = val;
 }

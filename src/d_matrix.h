@@ -9,7 +9,7 @@
 using namespace std;
 
 template <typename T>
-class matrix
+class matrix	
 {
 	public:
 		matrix(int numRows = 1, int numCols = 1, const T& initVal = T());
