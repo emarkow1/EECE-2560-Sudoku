@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include <limits.h>
-#include "d_matrix.h"
-#include "d_except.h"
 #include <list>
 #include <fstream>
+#include <vector>
+
+#include "d_matrix.h"
+#include "d_except.h"
 
 using namespace std;
 
@@ -22,7 +24,6 @@ const int BoardSize = SquareSize * SquareSize;
 
 const int MinValue = 1;
 const int MaxValue = 9;
-
 
 
 class board{
