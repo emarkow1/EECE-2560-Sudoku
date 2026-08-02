@@ -34,6 +34,8 @@ class board
       void print();
       bool isBlank(int, int);
       ValueType getCell(int, int);
+      void setCell(int, int, ValueType);
+      void printConflicts();
       
    private:
 
