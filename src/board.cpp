@@ -97,7 +97,8 @@ ostream &operator<<(ostream &ostr, vector<int> &v)
       ostr << v[i] << " ";   
    cout << endl;
    
-   return ostr;
+   // I added this to prevent a warning about no return value. It was not in the original code
+   return ostr; 
 }
 
 ValueType board::getCell(int i, int j)
