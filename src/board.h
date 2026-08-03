@@ -45,7 +45,7 @@ class board{
 
         void printConflicts();
 
-        void updateConflicts();
+        void Conflicts(int, int);
 
         bool isSolved();
 
