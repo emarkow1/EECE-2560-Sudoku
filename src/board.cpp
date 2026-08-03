@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int numSolutions = 0;
+int numSolutions = 0; // int numRecursiveCall = 0 for part b
 
 
 board::board(int sqSize)
@@ -114,7 +114,6 @@ void board::print()
       cout << "---";
    cout << "-";
    cout << endl;
-   printConflicts();
 }
 
 void board::setCell(int i, int j, ValueType val)
@@ -138,6 +137,8 @@ void board::printConflicts()
       cout << endl;
    }
 }
+
+//need to change slightly right now it goes through entire matrix isntead of only effected cells
 void board::updateConflicts()
 {
    for (int i = 1; i <= BoardSize; i++)
