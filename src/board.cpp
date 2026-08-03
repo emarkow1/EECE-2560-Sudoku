@@ -176,6 +176,7 @@ void board::updateConflicts()
    }
 }
 */
+//STILL PROBLEMS
 void board::Conflicts(int x, int y)
 {
    for (int i = 1; i <= BoardSize; i++)
