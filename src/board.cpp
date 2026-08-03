@@ -178,9 +178,11 @@ bool board::isSolved()
       for (int j = 1; j <= BoardSize; j++) {
          int cellValue = getCell(i,j);
          if (isBlank(i,j) || conflicts[i][j][cellValue-1] > 0) {
+            cout << "The board is not solved.";
             return false;
          }
       }
    }
+   cout << "The board is solved";
    return true;
 }

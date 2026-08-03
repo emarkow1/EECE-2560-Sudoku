@@ -28,8 +28,8 @@ int main()
       {
 	   b1.initialize(fin);
 	   b1.print();
-	   b1.updateConflicts();
-	   b1.printConflicts();
+      b1.isSolved();
+	   
       }
    }
    catch  (indexRangeError &ex)
