@@ -49,6 +49,8 @@ class board{
 
         bool isSolved();
 
+        void resetCell(int, int); // reset cell back to -1 and update the conflicts.
+
     private:
         matrix<ValueType> value;
         matrix<vector<int> > conflicts;

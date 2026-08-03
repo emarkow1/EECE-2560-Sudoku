@@ -187,3 +187,7 @@ bool board::isSolved()
    cout << "The board is solved";
    return true;
 }
+
+void board::resetCell(int i, int j) {
+   
+}
