@@ -8,7 +8,7 @@ int numSolutions = 0;
 
 
 board::board(int sqSize)
-   : value(BoardSize+1,BoardSize+1)
+   : value(BoardSize+1,BoardSize+1), conflicts(BoardSize+1, BoardSize+1)
 // Board constructor
 {
    clear();
@@ -22,6 +22,7 @@ void board::clear()
       {
          value[i][j] = Blank;
       }
+   updateConflicts();
 }
 
 void board::initialize(ifstream &fin)
@@ -113,6 +114,7 @@ void board::print()
       cout << "---";
    cout << "-";
    cout << endl;
+   printConflicts();
 }
 
 void board::setCell(int i, int j, ValueType val)
@@ -121,4 +123,64 @@ void board::setCell(int i, int j, ValueType val)
       throw rangeError("bad value in setCell");
 
    value[i][j] = val;
+   updateConflicts();
+}
+
+void board::printConflicts()
+{
+   for (int i = 1; i <= BoardSize; i++)
+   {
+      for (int j = 1; j <= BoardSize; j++)
+      {
+         cout << "Cell (" << i << "," << j << "): ";
+         cout << conflicts[i][j];
+      }
+      cout << endl;
+   }
+}
+void board::updateConflicts()
+{
+   for (int i = 1; i <= BoardSize; i++)
+   {
+      for (int j = 1; j <= BoardSize; j++){
+         conflicts[i][j].resize(9);
+         for (int k = 0; k < 9; k++) {
+            conflicts[i][j][k] = 0;
+
+            for (int m = 1; m <= BoardSize; m++) {
+               if (j != m && value[i][m] == k + 1) {
+                  conflicts[i][j][k]++;
+               }
+            }
+            for (int m = 1; m <= BoardSize; m++) {
+               if (i != m && value[m][j] == k + 1) {
+                  conflicts[i][j][k]++;
+               }
+            }
+
+            int rowCorner = ((i - 1) / SquareSize) * SquareSize + 1;
+            int colCorner = ((j - 1) / SquareSize) * SquareSize + 1;
+            for (int m = rowCorner; m < rowCorner + SquareSize; m++) {
+               for (int n = colCorner; n < colCorner + SquareSize; n++) {
+                  if (!(i == m && j == n) && value[m][n] == k + 1) {
+                     conflicts[i][j][k]++;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
+
+bool board::isSolved()
+{
+   for (int i = 1; i <= BoardSize; i++) {
+      for (int j = 1; j <= BoardSize; j++) {
+         int cellValue = getCell(i,j);
+         if (isBlank(i,j) || conflicts[i][j][cellValue-1] > 0) {
+            return false;
+         }
+      }
+   }
+   return true;
 }

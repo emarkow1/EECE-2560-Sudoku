@@ -43,9 +43,16 @@ class board{
 
         void setCell(int, int, ValueType);
 
-        // void printConflicts();
+        void printConflicts();
+
+        void updateConflicts();
+
+        bool isSolved();
+
     private:
         matrix<ValueType> value;
+        matrix<vector<int> > conflicts;
+
 };
 
 #endif
