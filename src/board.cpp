@@ -140,7 +140,7 @@ void board::printConflicts()
    }
 }
 
-/*
+
 //need to change slightly right now it goes through entire matrix isntead of only effected cells
 void board::updateConflicts()
 {
@@ -175,41 +175,7 @@ void board::updateConflicts()
       }
    }
 }
-*/
-//STILL PROBLEMS
-void board::Conflicts(int x, int y)
-{
-   for (int i = 1; i <= BoardSize; i++)
-   {
-      conflicts[i][y].resize(9);
-      conflicts[x][i].resize(9);
 
-      for (int k = 0; k < 9; k++) {
-         conflicts[i][y][k] = 0;
-
-         for (int m = 1; m <= BoardSize; m++) {
-            if (y != m && value[i][m] == k + 1) {
-               conflicts[i][y][k]++;
-            }
-         }
-         for (int m = 1; m <= BoardSize; m++) {
-            if (i != m && value[m][y] == k + 1) {
-               conflicts[i][y][k]++;
-            }
-         }
-
-         int rowCorner = ((x - 1) / SquareSize) * SquareSize + 1;
-         int colCorner = ((y - 1) / SquareSize) * SquareSize + 1;
-         for (int m = rowCorner; m < rowCorner + SquareSize; m++) {
-            for (int n = colCorner; n < colCorner + SquareSize; n++) {
-               if (!(x == m && y == n) && value[m][n] == k + 1) {
-                  conflicts[m][n][k]++;
-               }
-            }
-         }
-      }
-   }
-}
 
 bool board::isSolved()
 {
