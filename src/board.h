@@ -45,13 +45,13 @@ class board{
 
         void printConflicts();
 
-        void Conflicts(int, int);
-
         bool isSolved();
 
         void resetCell(int, int); // reset cell back to -1 and update the conflicts.
 
     private:
+        void updateConflicts(int row, int col, int change);
+
         matrix<ValueType> value;
         matrix<vector<int> > conflicts;
 

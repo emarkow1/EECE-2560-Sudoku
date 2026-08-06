@@ -17,13 +17,14 @@ board::board(int sqSize)
 void board::clear()
 // Mark all possible values as legal for each board entry
 {
-   for (int i = 1; i <= BoardSize; i++)
-      for (int j = 1; j <= BoardSize; j++)
-      {
-         value[i][j] = Blank;
-         Conflicts(i, j);
-      }
-   
+    for (int i = 1; i <= BoardSize; i++)
+    {
+        for (int j = 1; j <= BoardSize; j++)
+        {
+            value[i][j] = Blank;
+            conflicts[i][j].assign(BoardSize, 0);
+        }
+    }
 }
 
 void board::initialize(ifstream &fin)
@@ -35,14 +36,15 @@ void board::initialize(ifstream &fin)
    
    for (int i = 1; i <= BoardSize; i++)
       for (int j = 1; j <= BoardSize; j++)
-	    {
+	   {
 	       fin >> ch;
 
           // If the read char is not Blank
 	      if (ch != '.')
+         {
              setCell(i,j,ch-'0');   // Convert char to int
-             Conflicts(i, j);
-        }
+         }
+      }
 }
 
 int squareNumber(int i, int j)
@@ -121,11 +123,18 @@ void board::print()
 void board::setCell(int i, int j, ValueType val)
 {
    if (i < 1 || i > BoardSize || j < 1 || j > BoardSize)
+   {
+      throw rangeError("bad position in setCell");
+   }
+   
+   if (val < MinValue || val > MaxValue)
+   {
       throw rangeError("bad value in setCell");
+   }
 
    value[i][j] = val;
-   Conflicts(i, j);
-}
+   updateConflicts(i, j, 1);
+   }
 
 void board::printConflicts()
 {
@@ -140,42 +149,85 @@ void board::printConflicts()
    }
 }
 
+// OLD UPDATECONFLICTS
+// void board::updateConflicts()
+// {
+//    for (int i = 1; i <= BoardSize; i++)
+//    {
+//       for (int j = 1; j <= BoardSize; j++){
+//          conflicts[i][j].resize(9);
+//          for (int k = 0; k < 9; k++) {
+//             conflicts[i][j][k] = 0;
 
-//need to change slightly right now it goes through entire matrix isntead of only effected cells
-void board::updateConflicts()
+//             for (int m = 1; m <= BoardSize; m++) {
+//                if (j != m && value[i][m] == k + 1) {
+//                   conflicts[i][j][k]++;
+//                }
+//             }
+//             for (int m = 1; m <= BoardSize; m++) {
+//                if (i != m && value[m][j] == k + 1) {
+//                   conflicts[i][j][k]++;
+//                }
+//             }
+
+//             int rowCorner = ((i - 1) / SquareSize) * SquareSize + 1;
+//             int colCorner = ((j - 1) / SquareSize) * SquareSize + 1;
+//             for (int m = rowCorner; m < rowCorner + SquareSize; m++) {
+//                for (int n = colCorner; n < colCorner + SquareSize; n++) {
+//                   if (!(i == m && j == n) && value[m][n] == k + 1) {
+//                      conflicts[i][j][k]++;
+//                   }
+//                }
+//             }
+//          }
+//       }
+//    }
+// }
+
+
+void board::updateConflicts(int row, int col, int change)
 {
+   ValueType val = value[row][col];
+   
+   if (val == Blank)
+   {
+      return;
+   }
+
+   int vecIndex = val - 1;
+
+   for (int j = 1; j <= BoardSize; j++)
+   {
+      
+      if (j != col)
+      {
+         conflicts[row][j][vecIndex] += change;
+      }
+   }
+
    for (int i = 1; i <= BoardSize; i++)
    {
-      for (int j = 1; j <= BoardSize; j++){
-         conflicts[i][j].resize(9);
-         for (int k = 0; k < 9; k++) {
-            conflicts[i][j][k] = 0;
+      if (i != row)
+      {
+         conflicts[i][col][vecIndex] += change;
+      }
+   }
 
-            for (int m = 1; m <= BoardSize; m++) {
-               if (j != m && value[i][m] == k + 1) {
-                  conflicts[i][j][k]++;
-               }
-            }
-            for (int m = 1; m <= BoardSize; m++) {
-               if (i != m && value[m][j] == k + 1) {
-                  conflicts[i][j][k]++;
-               }
-            }
+   int firstRow = ((row-1) / SquareSize) * SquareSize + 1;
 
-            int rowCorner = ((i - 1) / SquareSize) * SquareSize + 1;
-            int colCorner = ((j - 1) / SquareSize) * SquareSize + 1;
-            for (int m = rowCorner; m < rowCorner + SquareSize; m++) {
-               for (int n = colCorner; n < colCorner + SquareSize; n++) {
-                  if (!(i == m && j == n) && value[m][n] == k + 1) {
-                     conflicts[i][j][k]++;
-                  }
-               }
-            }
+   int firstCol = ((col - 1) / SquareSize) * SquareSize + 1;
+
+   for (int i = firstRow; i < firstRow + SquareSize; i++)
+   {
+      for (int j = firstCol; j < firstCol + SquareSize; j++)
+      {
+         if (i != row || j != col)
+         {
+            conflicts[i][j][vecIndex] += change;
          }
       }
    }
 }
-
 
 bool board::isSolved()
 {
