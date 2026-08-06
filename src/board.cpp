@@ -38,11 +38,18 @@ void board::initialize(ifstream &fin)
       for (int j = 1; j <= BoardSize; j++)
 	   {
 	       fin >> ch;
-
+         if (ch == '.')
+         {
+            continue;
+         }
           // If the read char is not Blank
-	      if (ch != '.')
+	      if (ch >= '1' && ch <= '9')
          {
              setCell(i,j,ch-'0');   // Convert char to int
+         }
+         else
+         {
+            throw fileError("Invalid number/character in sudoku board");
          }
       }
 }
@@ -61,9 +68,11 @@ ostream &operator<<(ostream &ostr, vector<int> &v)
 // Overloaded output operator for vector class.
 {
    for (int i = 0; i < v.size(); i++)
-      ostr << v[i] << " ";   
-   cout << endl;
-   
+   {
+      ostr << v[i] << " ";
+   }
+
+   ostr << endl;
    // I added this to prevent a warning about no return value. It was not in the original code
    return ostr; 
 }
@@ -120,9 +129,9 @@ void board::print()
    cout << endl;
 }
 
-void board::setCell(int i, int j, ValueType val)
+void board::setCell(int row, int col, ValueType val)
 {
-   if (i < 1 || i > BoardSize || j < 1 || j > BoardSize)
+   if (row < 1 || row > BoardSize || col < 1 || col > BoardSize)
    {
       throw rangeError("bad position in setCell");
    }
@@ -132,8 +141,12 @@ void board::setCell(int i, int j, ValueType val)
       throw rangeError("bad value in setCell");
    }
 
-   value[i][j] = val;
-   updateConflicts(i, j, 1);
+  if (!isBlank(row, col))
+  {
+      throw rangeError("cell is not blank in setCell");
+  }
+   value[row][col] = val;
+   updateConflicts(row, col, 1);
    }
 
 void board::printConflicts()
@@ -245,7 +258,20 @@ bool board::isSolved()
    return true;
 }
 
-void board::resetCell(int i, int j) {
+void board::resetCell(int row, int col)
+{
+   if (row < 1 || row > BoardSize || col < 1 || col > BoardSize)
+   {
+      throw rangeError("bad position in resetCell");
+   }
 
+   if (isBlank(row, col))
+   {
+      return;
+   }
+
+   updateConflicts(row, col, -1);
+
+   value[row][col] = Blank;
 }
 
