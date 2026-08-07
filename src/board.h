@@ -41,11 +41,12 @@ class board{
 
         ValueType getCell(int, int);
 
-        void setCell(int, int, ValueType);
+        /// sets a cell to a value and updates conflicts
+        void setCell(int, int, ValueType); 
 
-        void printConflicts();
+        void printConflicts(); //prints the conflicts
 
-        bool isSolved();
+        bool isSolved(); //Checks if the board is solved
 
         void resetCell(int, int); // reset cell back to -1 and update the conflicts.
 

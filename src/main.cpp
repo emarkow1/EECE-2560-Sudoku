@@ -28,6 +28,8 @@ int main()
       {
 	   b1.initialize(fin);
 	   b1.print();
+      b1.setCell(1, 2, 5);
+      b1.print();
       b1.isSolved();
       b1.printConflicts();
 	   

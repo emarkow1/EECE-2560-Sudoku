@@ -129,6 +129,9 @@ void board::print()
    cout << endl;
 }
 
+//This sets the cell to a value and updates the conflicts
+// of the cells that are effected. There is error checking
+// to make sure the value and position are valid. 
 void board::setCell(int row, int col, ValueType val)
 {
    if (row < 1 || row > BoardSize || col < 1 || col > BoardSize)
@@ -149,6 +152,7 @@ void board::setCell(int row, int col, ValueType val)
    updateConflicts(row, col, 1);
    }
 
+//prints all the conflicts with a for loop.
 void board::printConflicts()
 {
    for (int i = 1; i <= BoardSize; i++)
@@ -162,42 +166,8 @@ void board::printConflicts()
    }
 }
 
-// OLD UPDATECONFLICTS
-// void board::updateConflicts()
-// {
-//    for (int i = 1; i <= BoardSize; i++)
-//    {
-//       for (int j = 1; j <= BoardSize; j++){
-//          conflicts[i][j].resize(9);
-//          for (int k = 0; k < 9; k++) {
-//             conflicts[i][j][k] = 0;
-
-//             for (int m = 1; m <= BoardSize; m++) {
-//                if (j != m && value[i][m] == k + 1) {
-//                   conflicts[i][j][k]++;
-//                }
-//             }
-//             for (int m = 1; m <= BoardSize; m++) {
-//                if (i != m && value[m][j] == k + 1) {
-//                   conflicts[i][j][k]++;
-//                }
-//             }
-
-//             int rowCorner = ((i - 1) / SquareSize) * SquareSize + 1;
-//             int colCorner = ((j - 1) / SquareSize) * SquareSize + 1;
-//             for (int m = rowCorner; m < rowCorner + SquareSize; m++) {
-//                for (int n = colCorner; n < colCorner + SquareSize; n++) {
-//                   if (!(i == m && j == n) && value[m][n] == k + 1) {
-//                      conflicts[i][j][k]++;
-//                   }
-//                }
-//             }
-//          }
-//       }
-//    }
-// }
-
-
+//This function updates the conflicts the cells effected when a ceertain 
+// cell is changed
 void board::updateConflicts(int row, int col, int change)
 {
    ValueType val = value[row][col];
@@ -242,6 +212,9 @@ void board::updateConflicts(int row, int col, int change)
    }
 }
 
+//Determines if the board is solved by checking if any cell is blank
+// or if any cell has a conflict. If either condition is true, the board
+// is not solved. Otherwise, the board is solved.
 bool board::isSolved()
 {
    
@@ -258,6 +231,8 @@ bool board::isSolved()
    return true;
 }
 
+//This is used to reset a cell back to blank and update all the
+//conflicts to the change.
 void board::resetCell(int row, int col)
 {
    if (row < 1 || row > BoardSize || col < 1 || col > BoardSize)
