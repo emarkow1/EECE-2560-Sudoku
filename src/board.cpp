@@ -2,15 +2,17 @@
 // 1-satbermacmar-3a
 // board.cpp
 // authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
+// This file contains the implementation of the board class,
+// which represents a Sudoku board.
 
-
-// Declarations and functions for project #4
+// Declarations and functions for project #3
 #include "board.h"
-
-
 using namespace std;
 
-int numSolutions = 0; // int numRecursiveCall = 0 for part b
+// Global variable for tracking the number of solutions 
+// and recursive calls. Included from teacher provided code 
+// for part b
+//int numSolutions = 0; 
 
 
 board::board(int sqSize)

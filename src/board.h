@@ -1,7 +1,10 @@
 // EECE 2560 Sudoku Project
 // 1-satbermacmar-3a
-// board.cpp
+// board.h
 // authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
+// This is the board header file to declare the class board
+// Declarations and functions for project #3
+
 
 #ifndef board_h
 #define board_h
@@ -36,28 +39,39 @@ class board{
         // Constructs and empty board object
         board(int);
 
+        // Intializes the board object with values from the input file
         void initialize(ifstream &fin);
 
+        // clear the board object to be blank
         void clear();
 
+        // prints the board object to the console
         void print();
 
+        // returns if a cell is blank or not with true or false
         bool isBlank(int, int);
 
+        // returns the value of a cell
         ValueType getCell(int, int);
 
         /// sets a cell to a value and updates conflicts
         void setCell(int, int, ValueType); 
 
-        void printConflicts(); //prints the conflicts
+        //prints the conflicts
+        void printConflicts(); 
 
-        bool isSolved(); //Checks if the board is solved
+        //Checks if the board is solved
+        bool isSolved(); 
 
-        void resetCell(int, int); // reset cell back to -1 and update the conflicts.
+        // reset cell back to -1 and update the conflicts.
+        void resetCell(int, int); 
 
     private:
+        // updates the conflicts of the cells that are effected 
+        // by a change
         void updateConflicts(int row, int col, int change);
 
+        // data members for the board class
         matrix<ValueType> value;
         matrix<vector<int> > conflicts;
 

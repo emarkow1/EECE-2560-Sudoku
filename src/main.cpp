@@ -30,8 +30,11 @@ int main()
 
       while (fin && fin.peek() != 'Z')
       {
+      // Read the sample grid from the file.
 	   b1.initialize(fin);
+      // Print the sample grid to the console.
 	   b1.print();
+      // Test the setCell, resetCell, isSolved, and printConflicts functions
       b1.setCell(1, 2, 5);
       b1.print();
       b1.resetCell(1, 2);
