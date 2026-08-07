@@ -1,3 +1,9 @@
+// EECE 2560 Sudoku Project
+// 1-satbermacmar-3a
+// board.cpp
+// authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
+
+
 // Declarations and functions for project #4
 #include "board.h"
 

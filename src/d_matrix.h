@@ -1,3 +1,8 @@
+// EECE 2560 Sudoku Project
+// 1-satbermacmar-3a
+// d_matrix.h
+// authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
+
 #ifndef MATRIX_CLASS
 #define MATRIX_CLASS
 

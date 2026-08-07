@@ -1,5 +1,10 @@
-#include "board.h"
+// EECE 2560 Sudoku Project
+// 1-satbermacmar-3a
+// main.cpp
+// authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
 
+
+#include "board.h"
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -16,8 +21,7 @@ int main()
    fin.open(fileName.c_str());
    if (!fin)
    {
-      cerr << "Cannot open " << fileName << endl;
-      exit(1);
+      throw fileOpenError(fileName);
    }
 
    try

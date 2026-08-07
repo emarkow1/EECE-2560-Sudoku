@@ -1,9 +1,7 @@
-// EECE 2560 Wordsearch Project
-// 1-satbermacmar-2a
+// EECE 2560 Sudoku Project
+// 1-satbermacmar-3b
 // d_except.h
-//
-// Instructor provided exception-class library that is unedited
-//
+// authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
 
 #ifndef EXCEPTION_CLASSES
 #define EXCEPTION_CLASSES

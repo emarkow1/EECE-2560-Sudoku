@@ -1,3 +1,8 @@
+// EECE 2560 Sudoku Project
+// 1-satbermacmar-3a
+// board.cpp
+// authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
+
 #ifndef board_h
 #define board_h
 
