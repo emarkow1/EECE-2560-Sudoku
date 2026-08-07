@@ -174,7 +174,7 @@ void board::printConflicts()
    }
 }
 
-//This function updates the conflicts the cells effected when a ceertain 
+//This function updates the conflicts the cells effected when a certain 
 // cell is changed
 void board::updateConflicts(int row, int col, int change)
 {
