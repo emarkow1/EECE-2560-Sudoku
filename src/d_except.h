@@ -1,5 +1,5 @@
 // EECE 2560 Sudoku Project
-// 1-satbermacmar-3b
+// 1-satbermacmar-3a
 // d_except.h
 // authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
 
