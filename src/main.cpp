@@ -35,11 +35,8 @@ int main()
       {
       // Read the sample grid from the file.
 	   b1.initialize(fin);
-      // Print the sample grid to the console.
-	   //b1.print();
-      // Test the setCell, resetCell, isSolved, and printConflicts functions
-      //b1.printConflicts();
       b1.solve();
+      cout << "Number of recursive calls: " << b1.getNumRecursiveCalls() << endl;
 	   
       numberOfBoards++;
       numRecursiveCalls += b1.getNumRecursiveCalls();

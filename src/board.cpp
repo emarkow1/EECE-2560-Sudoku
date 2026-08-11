@@ -318,9 +318,7 @@ void board::solve(){
    numRecursiveCalls++;
    if (isSolved())
    {
-      cout << "Solution: " << endl;
       print();
-      cout << "Number of recursive calls: " << numRecursiveCalls << endl;
       return;
    } 
 
