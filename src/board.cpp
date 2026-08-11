@@ -279,3 +279,15 @@ void board::resetCell(int row, int col)
    value[row][col] = Blank;
 }
 
+void board::nextBlankCell(int &row, int &col){
+
+}
+// check if a value is legal for a given blank cell
+bool board::isLegal(int row, int col, ValueType val){
+   return conflicts[row][col][val - 1] == 0;
+}
+
+
+void board::solve(){
+   
+}

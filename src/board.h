@@ -65,9 +65,20 @@ class board{
         // reset cell back to -1 and update the conflicts.
         void resetCell(int, int); 
 
+        // solves the sudoku board using backtracking and recursion
+        void solve();
+
+
     private:
         // updates the conflicts of the cells that are effected by a change
         void updateConflicts(int row, int col, int change);
+
+        // returns the next blank cell to fill in a digit
+        void nextBlankCell(int &row, int &col);
+
+        // checks if a value is legal for a cell 
+        bool isLegal(int row, int col, ValueType val);
+        
 
         // data members for the board class
         matrix<ValueType> value;
