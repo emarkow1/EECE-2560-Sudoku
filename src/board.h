@@ -66,7 +66,7 @@ class board{
         void resetCell(int, int); 
 
         // solves the sudoku board using backtracking and recursion
-        void solve();
+        bool solve();
 
         int getNumRecursiveCalls() const { return numRecursiveCalls; }
 

@@ -313,15 +313,26 @@ bool board::isLegal(int row, int col, ValueType val){
    return conflicts[row][col][val - 1] == 0;
 }
 
-
-void board::solve(){
+// solves the sudoku board using backtracking and recursion.
+// It only allows one solution to be found by returning true when a solution
+// is found. If the recursive call is true then the function stops
+// backtracking and returns true. If the recursive call is false (unsolved), 
+// then the cell is reset. 
+bool board::solve(){
+   //adds to the number of recussive calls when function is called
    numRecursiveCalls++;
+
+   //checks to see if function is solved
    if (isSolved())
    {
       print();
-      return;
+      return true;
    } 
 
+   // if the functinon is not solved then find the next blank cell,
+   // and check if the value is legal for the cell. If it is legal,
+   // set the cell then call the function again.
+   // if it isnt legal, then check the next value. 
    int row, col;
    nextBlankCell(row, col);
    for (int i = 1; i <= 9; i++){
@@ -329,9 +340,15 @@ void board::solve(){
          if (isLegal(row, col, i))
          {
             setCell(row, col, i);
-            solve();
-            resetCell(row, col);
+            if (solve() == true)
+            {
+               return true;
+            } else {
+               resetCell(row, col);
+            }
          }
       }
    }
+   // If no solution is found, return false
+   return false;
 }
