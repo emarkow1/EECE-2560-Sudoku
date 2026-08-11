@@ -13,10 +13,13 @@ using namespace std;
 
 int main()
 {
+   int numRecursiveCalls = 0;
+   int numberOfBoards = 0;
+
    ifstream fin;
    
    // Read the sample grid from the file.
-   string fileName = "sudoku1.txt";
+   string fileName = "sudoku1-3.txt";
 
    fin.open(fileName.c_str());
    if (!fin)
@@ -27,8 +30,6 @@ int main()
    try
    {
       board b1(SquareSize);
-      int numRecursiveCalls = 0;
-      int numberOfBoards = 0;
 
       while (fin && fin.peek() != 'Z')
       {
@@ -39,9 +40,9 @@ int main()
       // Test the setCell, resetCell, isSolved, and printConflicts functions
       //b1.printConflicts();
       b1.solve();
-      b1.isSolved();
 	   
-
+      numberOfBoards++;
+      numRecursiveCalls += b1.getNumRecursiveCalls();
       
       fin >> ws;
 
@@ -52,4 +53,5 @@ int main()
       cout << ex.what() << endl;
       exit(1);
    }
+   cout << "The average number of recrusive calls per board is: " << (numRecursiveCalls / numberOfBoards) << endl;
 }

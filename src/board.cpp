@@ -31,6 +31,7 @@ void board::clear()
             conflicts[i][j].assign(BoardSize, 0);
         }
     }
+    numRecursiveCalls = 0;
 }
 
 void board::initialize(ifstream &fin)
