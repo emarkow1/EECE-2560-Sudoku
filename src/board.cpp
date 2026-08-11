@@ -12,8 +12,6 @@ using namespace std;
 // Global variable for tracking the number of solutions 
 // and recursive calls. Included from teacher provided code 
 // for part b
-//int numSolutions = 0; 
-
 
 board::board(int sqSize)
    : value(BoardSize+1,BoardSize+1), conflicts(BoardSize+1, BoardSize+1)
@@ -251,12 +249,12 @@ bool board::isSolved()
          int cellValue = getCell(i,j);
          if (isBlank(i,j) || conflicts[i][j][cellValue-1] > 0)
          {
-            cout << "The board is not solved." << endl;
+            //cout << "The board is not solved." << endl;
             return false;
          }
       }
    }
-   cout << "The board is solved" << endl;
+   //cout << "The board is solved" << endl;
    return true;
 }
 
@@ -316,5 +314,25 @@ bool board::isLegal(int row, int col, ValueType val){
 
 
 void board::solve(){
-   
+   numRecursiveCalls++;
+   if (isSolved())
+   {
+      cout << "Solution: " << endl;
+      print();
+      cout << "Number of recursive calls: " << numRecursiveCalls << endl;
+      return;
+   } 
+
+   int row, col;
+   nextBlankCell(row, col);
+   for (int i = 1; i <= 9; i++){
+      {
+         if (isLegal(row, col, i))
+         {
+            setCell(row, col, i);
+            solve();
+            resetCell(row, col);
+         }
+      }
+   }
 }

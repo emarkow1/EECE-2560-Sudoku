@@ -27,17 +27,22 @@ int main()
    try
    {
       board b1(SquareSize);
+      int numRecursiveCalls = 0;
+      int numberOfBoards = 0;
 
       while (fin && fin.peek() != 'Z')
       {
       // Read the sample grid from the file.
 	   b1.initialize(fin);
       // Print the sample grid to the console.
-	   b1.print();
+	   //b1.print();
       // Test the setCell, resetCell, isSolved, and printConflicts functions
-      b1.printConflicts();
+      //b1.printConflicts();
+      b1.solve();
       b1.isSolved();
 	   
+
+      
       fin >> ws;
 
       }

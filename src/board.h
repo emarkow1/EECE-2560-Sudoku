@@ -68,6 +68,8 @@ class board{
         // solves the sudoku board using backtracking and recursion
         void solve();
 
+        int getNumRecursiveCalls() const { return numRecursiveCalls; }
+
 
     private:
         // updates the conflicts of the cells that are effected by a change
@@ -83,6 +85,7 @@ class board{
         // data members for the board class
         matrix<ValueType> value;
         matrix<vector<int> > conflicts;
+        int numRecursiveCalls;
 
 };
 
