@@ -279,8 +279,8 @@ void board::resetCell(int row, int col)
    value[row][col] = Blank;
 }
 
+// Look for next best blank cell that has least amount of conflicts
 void board::nextBlankCell(int &row, int &col){
-
 }
 // check if a value is legal for a given blank cell
 bool board::isLegal(int row, int col, ValueType val){
