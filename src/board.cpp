@@ -279,8 +279,35 @@ void board::resetCell(int row, int col)
    value[row][col] = Blank;
 }
 
-// Look for next best blank cell that has least amount of conflicts
+// Look for next best blank cell that has most amount of conflicts
 void board::nextBlankCell(int &row, int &col){
+   int mostCoflicts = -1;
+   vector<int> bestCell(2, 0);
+   for (int i = 1; i <= BoardSize; i++)
+   {
+      for (int j = 1; j <= BoardSize; j++)
+      {
+         int ammountOfConflicts = 0;
+         if (isBlank(i,j))
+         {
+            for (int k = 0; k < 9; k++)
+            {
+               if (conflicts[i][j][k] > 0)
+               {
+                  ammountOfConflicts++;
+               }
+            }
+            if (ammountOfConflicts > mostCoflicts)
+            {
+               mostCoflicts = ammountOfConflicts;
+               bestCell[0] = i;
+               bestCell[1] = j;
+            }
+         }
+      }
+   }
+   row = bestCell[0];
+   col = bestCell[1];
 }
 // check if a value is legal for a given blank cell
 bool board::isLegal(int row, int col, ValueType val){
