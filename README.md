@@ -24,6 +24,16 @@ Implements the framework for a sudoku solver based on a backtracking algorithm. 
 
 `isSolved`: Checks if the board is full and all cells have valid entries and prints the result to the terminal.
 
+## Part B:
+
+The program reads all the sudoku boards from the file [sudoku.txt](sudoku.txt) and solves them using a recursive backtracking.
+
+`nextBlankCell`: Iterates through the conflicts matrix to find the most constrained blank cell.
+
+`isLegal`: Checks the conflicts matrix and returns whether a particular digit would be valid according to the sudoku rules.
+
+`solve`: checks if the board is solved using `isSolved`, finds the next blank cell using `nextBlankCell`, then tries digits until it finds a legal one to fill in, if there is it calls itself, and if not it backtracks to the previous digit.
+
 ## Building and Running the Program
 
 [CMakeLists.txt](CMakeLists.txt) will build the program.
