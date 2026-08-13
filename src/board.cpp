@@ -279,16 +279,25 @@ void board::resetCell(int row, int col)
 }
 
 // Look for next best blank cell that has most amount of conflicts
-void board::nextBlankCell(int &row, int &col){
+void board::nextBlankCell(int &row, int &col) 
+{
+
+   // Keeps track of largest # of conflicts (with corresponding row/column)
    int mostCoflicts = -1;
    vector<int> bestCell(2, 0);
+
+   // Goes through every cell on board
    for (int i = 1; i <= BoardSize; i++)
    {
       for (int j = 1; j <= BoardSize; j++)
       {
          int ammountOfConflicts = 0;
+
+         // only considers cells with no values (blank cells)
          if (isBlank(i,j))
          {
+
+            // count the prevented values due to conflicts in this cell
             for (int k = 0; k < 9; k++)
             {
                if (conflicts[i][j][k] > 0)
@@ -296,6 +305,9 @@ void board::nextBlankCell(int &row, int &col){
                   ammountOfConflicts++;
                }
             }
+            
+            // if cell has more conflicts than current best cell, saves it as
+            // the mostConflicts
             if (ammountOfConflicts > mostCoflicts)
             {
                mostCoflicts = ammountOfConflicts;
@@ -309,7 +321,8 @@ void board::nextBlankCell(int &row, int &col){
    col = bestCell[1];
 }
 // check if a value is legal for a given blank cell
-bool board::isLegal(int row, int col, ValueType val){
+bool board::isLegal(int row, int col, ValueType val)
+{
    return conflicts[row][col][val - 1] == 0;
 }
 
@@ -318,7 +331,8 @@ bool board::isLegal(int row, int col, ValueType val){
 // is found. If the recursive call is true then the function stops
 // backtracking and returns true. If the recursive call is false (unsolved), 
 // then the cell is reset. 
-bool board::solve(){
+bool board::solve()
+{
    //adds to the number of recussive calls when function is called
    numRecursiveCalls++;
 

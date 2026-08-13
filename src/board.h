@@ -2,9 +2,8 @@
 // 1-satbermacmar-3a
 // board.h
 // authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
-// This is the board header file to declare the class board
-// Declarations and functions for project #3
-
+// This is the board header file to declare the class board declarations and
+// functions for Project #3
 
 #ifndef board_h
 #define board_h

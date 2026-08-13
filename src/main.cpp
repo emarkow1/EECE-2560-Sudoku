@@ -2,6 +2,8 @@
 // 1-satbermacmar-3a
 // main.cpp
 // authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
+// main.cpp reads the sudoku input files, initializes the corresponding boards,
+// and solves each sudoku puzzle while displaying results to the user.
 
 
 #include "board.h"
