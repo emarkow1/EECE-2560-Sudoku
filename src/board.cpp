@@ -1,5 +1,5 @@
 // EECE 2560 Sudoku Project
-// 1-satbermacmar-3a
+// 1-satbermacmar-3b
 // board.cpp
 // authors: Jacob Berman, Ethan Markow, Donald Mackinnon, Emile Sater
 // This file contains the implementation of the board class, which represents a
